@@ -1,6 +1,6 @@
 /**
- * "Scrollar"
  * Author: Alexander Leutsky
+ * Base styles
  */
 
 
@@ -71,6 +71,9 @@
 }
 
 /* No horizontal scroll */
+.scrollar-nohscroll .scrollar-viewport {
+    bottom: 0px;
+}
 .scrollar-nohscroll .scrollar-contentwrap {
     right: 0px;
     width: auto;
@@ -82,6 +85,9 @@
 .scrollar-nohscroll .scrollar-corner { display: none; }
 
 /* No vertical scroll */
+.scrollar-novscroll .scrollar-viewport {
+    right: 0px;
+}
 .scrollar-novscroll .scrollar-contentwrap {
     bottom: 0px;
     height: auto;

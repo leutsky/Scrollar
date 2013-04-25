@@ -254,10 +254,31 @@
             height: 14px;
             width: 14px;
         }
+
+        .safari.scrollar-nohscroll .scrollar-vscroll {
+            bottom: 0px;
+        }
+
+        .safari.scrollar-novscroll .scrollar-hscroll {
+            right: 0px;
+        }
+
+        .safari.scrollar-nohscroll .scrollar-corner, .safari.scrollar-novscroll .scrollar-corner {
+            display: none;
+        }
+
+        .safari.scrollar-nohscroll .scrollar-viewport {
+            bottom: 0px;
+        }
+
+        .safari.scrollar-novscroll .scrollar-viewport {
+            right: 0px;
+        }
     </style>
 
     <script>
         var current_style = "default";
+        var sa;
 
         $(function () {
             $("#menu div.item").click(function () {
@@ -272,7 +293,7 @@
                 current_style = new_style;
             });
 
-            new Scrollar({element : "#content"});
+            sa = new Scrollar({element : "#content"});
         });
     </script>
 </head>

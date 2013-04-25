@@ -12,7 +12,9 @@
  */
 
 (function (window) {
-    window.Scrollar = Scrollar;
+    window.Scrollar = function (options) {
+        return new Scrollar(options);
+    }
 
     var axis_x = ["left", "pageX", "max_x", "scrollLeft"],
         axis_y = ["top", "pageY", "max_y", "scrollTop"];
