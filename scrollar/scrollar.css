@@ -1,0 +1,93 @@
+/**
+ * "Scrollar"
+ * Author: Alexander Leutsky
+ */
+
+
+.scrollar, .scrollar-viewport, .scrollar-systemscrolls, .scrollar-contentwrap, .scrollar-content {
+    bottom: 0px;
+    height: auto;
+    left: 0px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: auto;
+}
+
+.scrollar { overflow: visible; position: relative; }
+
+.scrollar-contentwrap, .scrollar-content {
+    bottom: auto;
+    right: auto;
+}
+
+.scrollar-viewport {
+    clip: rect(0, auto, auto, 0);
+    clip: rect(0 100% 100% 0);
+}
+
+.scrollar-systemscrolls {
+    bottom: -22px;
+    overflow: scroll;
+    right: -22px;
+}
+
+.scrollar-contentwrap { }
+.scrollar-content { }
+
+.scrollar-scroll,
+.scrollar-track,
+.scrollar-btn,
+.scrollar-thumb,
+.scrollar-corner {
+    position: absolute;
+}
+
+.scrollar-hscroll {
+    bottom: 0px;
+    height: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.scrollar-vscroll {
+    bottom: 0px;
+    right: 0px;
+    top: 0px;
+    width: 0px;
+}
+
+.scrollar-btnup { left: 0px; top: 0px; }
+.scrollar-btndown { bottom: 0px; left: 0px; }
+.scrollar-btnleft { left: 0px; top: 0px; }
+.scrollar-btnright { right: 0px; top: 0px; }
+
+.scrollar-vthumb { max-height: 100%; height: 30px; left: 0px; right: 0px; }
+.scrollar-hthumb { max-width: 100%; width: 30px; bottom: 0px; top: 0px; }
+
+.scrollar-corner {
+    bottom: 0px;
+    right: 0px;
+}
+
+/* No horizontal scroll */
+.scrollar-nohscroll .scrollar-contentwrap {
+    right: 0px;
+    width: auto;
+}
+.scrollar-nohscroll .scrollar-content { right: 0px; }
+.scrollar-nohscroll .scrollar-systemscrolls { overflow-x: hidden; }
+.scrollar-nohscroll .scrollar-hscroll { display: none; }
+.scrollar-nohscroll .scrollar-vscroll { bottom: 0px; }
+.scrollar-nohscroll .scrollar-corner { display: none; }
+
+/* No vertical scroll */
+.scrollar-novscroll .scrollar-contentwrap {
+    bottom: 0px;
+    height: auto;
+}
+.scrollar-novscroll .scrollar-content { bottom: 0px; }
+.scrollar-novscroll .scrollar-systemscrolls { overflow-y: hidden; }
+.scrollar-novscroll .scrollar-vscroll { display: none; }
+.scrollar-novscroll .scrollar-hscroll { right: 0px; }
+.scrollar-novscroll .scrollar-corner { display: none; }

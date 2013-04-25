@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scrollar.Fullscreen</title>
+
+    <script src="extra/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="scrollar/scrollar.css">
+    <script src="scrollar/scrollar.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+
+
+        /***  Menu  ***/
+
+
+        #menu {
+            background-color: #fff;
+            border: 1px solid #778899;
+            border-left: none;
+            border-top: none;
+            border-bottom-right-radius: 7px;
+            opacity: 0.5;
+            padding: 5px;
+            position: fixed;
+            z-index: 10;
+        }
+
+        #menu:hover {
+            opacity: 1;
+        }
+
+        #menu:hover div.item {
+            display: block;
+        }
+
+        #menu div.title {
+            cursor: pointer;
+            margin: 0px 10px;
+            text-align: center;
+        }
+
+        #menu div.item {
+            border: 1px solid silver;
+            border-radius: 5px;
+            box-shadow: inset 0px -2px 4px #eee;
+            cursor: pointer;
+            display: none;
+            font-family: Arial;
+            font-size: 12px;
+            margin: 2px 0px;
+            padding: 3px 7px;
+        }
+
+        #menu div.item:hover {
+            background-color: #e0ffff;
+        }
+
+        #menu div.item:active {
+            box-shadow: inset 0px 1px 2px #add8e6;
+        }
+
+        #menu div.item.selected {
+            background-color: #e0ffff;
+            box-shadow: inset 0px 1px 2px #add8e6;
+        }
+
+        /* Customize scrollar */
+
+        /* stretch it */
+        /** root element */
+        .scrollar {
+            position: fixed;
+        }
+
+
+
+        /***  Style "Default"  ***/
+
+
+        .default .scrollar-viewport {
+            bottom: 2px;
+            right: 2px;
+        }
+
+        .default .scrollar-scroll {
+            z-index: 0;
+        }
+
+        .default .scrollar-scroll:hover, .default .scrollar-active-scroll {
+            z-index: 1;
+        }
+
+        .default .scrollar-scroll:hover, .default .scrollar-active-scroll, .scrollar-track {
+            background-color: #eee;
+        }
+
+        .default .scrollar-hscroll {
+            bottom: 0px;
+            height: 10px;
+            left: 0px;
+            right: 0px;
+        }
+
+        .default .scrollar-hscroll > div {
+            height: 2px;
+            top: 8px;
+        }
+
+        .default .scrollar-hscroll:hover > div, .default .scrollar-hscroll.scrollar-active-scroll > div {
+            height: 10px;
+            top: 0px;
+        }
+
+        .default .scrollar-vscroll {
+            bottom: 0px;
+            right: 0px;
+            top: 0px;
+            width: 10px;
+        }
+
+        .default .scrollar-vscroll > div {
+            left: 8px;
+            width: 2px;
+        }
+
+        .default .scrollar-vscroll:hover > div, .default .scrollar-vscroll.scrollar-active-scroll > div {
+            left: 0px;
+            width: 10px;
+        }
+
+        .default .scrollar-htrack {
+            bottom: 0px;
+            left: 11px;
+            right: 11px;
+            top: 0px;
+        }
+
+        .default .scrollar-vtrack {
+            bottom: 11px;
+            left: 0px;
+            right: 0px;
+            top: 11px;
+        }
+
+        .default .scrollar-btn,
+        .default .scrollar-thumb,
+        .default .scrollar-corner {
+            background-color: #999;
+        }
+
+        .default .scrollar-btnup, .default .scrollar-btndown {
+            height: 10px;
+            left: 0px;
+        }
+
+        .default .scrollar-btnleft, .default .scrollar-btnright {
+            top: 0px;
+            width: 10px;
+        }
+
+        .default .scrollar-corner {
+            display: none;
+        }
+
+
+
+        /***  Style "Safari"  ***/
+
+        .safari-50 {
+            height: 50%;
+            width: 50%;
+        }
+
+        .safari .scrollar-viewport {
+            bottom: 14px;
+            right: 14px;
+        }
+
+        .safari .scrollar-track {
+            background-color: transparent;
+        }
+
+        .safari .scrollar-btn {
+            display: none;
+        }
+
+        .safari .scrollar-scroll, .safari .scrollar-scroll:hover {
+            background-color: #f3f3f3;
+            opacity: 1;
+        }
+
+        .safari .scrollar-scroll:hover .scrollar-thumb, .safari .scrollar-active-scroll .scrollar-thumb {
+            background-color: rgb(126, 126, 126);
+        }
+
+        .safari .scrollar-hscroll {
+            background-image: -o-linear-gradient(top, rgb(243, 243, 243) 0%, rgb(250, 250, 250) 60%, rgb(240, 240, 240) 100%);
+            background-image: -ms-linear-gradient(top, rgb(243, 243, 243) 0%, rgb(250, 250, 250) 60%, rgb(240, 240, 240) 100%);
+            background-image: -moz-linear-gradient(top, rgb(243, 243, 243) 0%, rgb(250, 250, 250) 60%, rgb(240, 240, 240) 100%);
+            background-image: -webkit-linear-gradient(top, rgb(243, 243, 243) 0%, rgb(250, 250, 250) 60%, rgb(240, 240, 240) 100%);
+            background-image: linear-gradient(top, rgb(243, 243, 243) 0%, rgb(250, 250, 250) 60%, rgb(240, 240, 240) 100%);
+            border-top: 1px solid rgb(229, 229, 229);
+            height: 13px;
+            right: 14px;
+        }
+
+        .safari .scrollar-htrack {
+            bottom: 3px;
+            height: auto;
+            left: 3px;
+            right: 3px;
+            top: 2px;
+        }
+
+        .safari .scrollar-vscroll {
+            background-image: -o-linear-gradient(left, rgb(243, 243, 243) 0%, rgb(253, 253, 253) 60%, rgb(240, 240, 240) 100%);
+            background-image: -ms-linear-gradient(left, rgb(243, 243, 243) 0%, rgb(253, 253, 253) 60%, rgb(240, 240, 240) 100%);
+            background-image: -moz-linear-gradient(left, rgb(243, 243, 243) 0%, rgb(253, 253, 253) 60%, rgb(240, 240, 240) 100%);
+            background-image: -webkit-linear-gradient(left, rgb(243, 243, 243) 0%, rgb(253, 253, 253) 60%, rgb(240, 240, 240) 100%);
+            background-image: linear-gradient(left, rgb(243, 243, 243) 0%, rgb(253, 253, 253) 60%, rgb(240, 240, 240) 100%);
+            border-left: 1px solid rgb(229, 229, 229);
+            bottom: 14px;
+            width: 13px;
+        }
+
+        .safari .scrollar-vtrack {
+            bottom: 3px;
+            left: 2px;
+            right: 3px;
+            top: 3px;
+            width: auto;
+        }
+
+        .safari .scrollar-thumb {
+            background-color: rgb(187, 187, 187);
+            border: none;
+            border-radius: 5px;
+            -o-transition: background-color .3s;
+            -ms-transition: background-color .3s;
+            -moz-transition: background-color .3s;
+            -webkit-transition: background-color .3s;
+            transition: background-color .3s;
+        }
+
+        .safari .scrollar-corner {
+            background-color: #fff;
+            display: block;
+            height: 14px;
+            width: 14px;
+        }
+    </style>
+
+    <script>
+        var current_style = "default";
+
+        $(function () {
+            $("#menu div.item").click(function () {
+                var new_style = $(this).attr("data-style");
+
+                if (new_style == current_style) return;
+
+                $("#menu div.item.selected").removeClass("selected");
+                $("#menu div.item[data-style='" + new_style + "']").addClass("selected");
+                $("#content").removeClass(current_style).addClass(new_style);
+
+                current_style = new_style;
+            });
+
+            new Scrollar({element : "#content"});
+        });
+    </script>
+</head>
+<body>
+    <div id="menu">
+        <div class="title">Styles</div>
+        <div class="item selected" data-style="default">Default</div>
+        <div class="item" data-style="safari">Safari (OS X Mountain Lion)</div>
+        <div class="item" data-style="safari safari-50">Safari 50% (OS X Mountain Lion)</div>
+    </div>
+
+    <div id="content" class="default">
+        <img src="extra/content.jpg">
+        <img src="extra/content.jpg"><br>
+        <img src="extra/content.jpg">
+        <img src="extra/content.jpg">
+    </div>
+
+</body>
+</html>

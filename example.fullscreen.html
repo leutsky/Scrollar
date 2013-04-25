@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scrollar.Fullscreen</title>
+
+    <script src="extra/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="scrollar/scrollar.css">
+    <script src="scrollar/scrollar.js"></script>
+
+    <style>
+        /* reset body offsets */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Customize scrollar */
+
+        /* stretch it */
+        /** root element */
+        .scrollar {
+            position: fixed;
+        }
+
+        /* commons for scrolls */
+        .scrollar-btn,
+        .scrollar-track {
+            background-color: #00bfff;
+        }
+
+        .scrollar-track {
+            opacity: 0.3;
+        }
+
+        .scrollar-track:hover, .scrollar-active-track {
+            opacity: 0.9;
+        }
+
+        /** thumbs */
+        .scrollar-thumb {
+            border: 3px solid red;
+            border-radius: 8px;
+        }
+
+        .scrollar-vthumb {
+            width: 9px;
+        }
+
+        .scrollar-hthumb {
+            height: 9px;
+        }
+
+        /** buttons */
+        .scrollar-btn {
+            background-image: url("extra/glyphicons-halflings.png");
+            background-repeat: no-repeat;
+            height: 15px;
+            width: 15px;
+        }
+
+        .scrollar-btn:hover {
+            background-image: url("extra/glyphicons-halflings-white.png");
+        }
+
+        .scrollar-btnup {
+            background-position: -287px -120px;
+            border-radius: 5px 5px 0px 0px;
+            top: -15px;
+        }
+        .scrollar-btndown {
+            background-position: -312px -119px;
+            border-radius: 0px 0px 5px 5px;
+            bottom: -15px;
+        }
+        .scrollar-btnleft {
+            background-position: -431px -72px;
+            border-radius: 5px 0px 0px 5px;
+            left: -15px;
+        }
+        .scrollar-btnright {
+            background-position: -457px -72px;
+            border-radius: 0px 5px 5px 0px;
+            right: -15px;
+        }
+
+        /* horisontal scroll */
+        /** track */
+        .scrollar-htrack {
+            left: 15px;
+            height: 15px;
+            right: 30px;
+        }
+
+        /* vertical scroll */
+        /** track */
+        .scrollar-vtrack {
+            bottom: 30px;
+            top: 15px;
+            width: 15px;
+        }
+
+        /* horisontal scroll don't need */
+        /** vtrack */
+        .scrollar-nohscroll .scrollar-vtrack {
+            bottom: 15px;
+        }
+
+        /* vertical scroll don't need */
+        /** htrack */
+        .scrollar-novscroll .scrollar-htrack {
+            right: 15px;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            new Scrollar({element : "body"});
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <img src="extra/content.jpg">
+        <img src="extra/content.jpg"><br>
+        <img src="extra/content.jpg">
+        <img src="extra/content.jpg">
+    </div>
+</body>
+</html>
