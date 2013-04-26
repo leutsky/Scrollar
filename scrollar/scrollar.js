@@ -55,7 +55,6 @@
         var _this = this;
 
         this.options = options = normalizeOptions(options);
-        console.log("Options: ", options);
 
         this.$ = $(options.element);
         if (!this.$.hasClass("scrollar")) this.$.addClass("scrollar");

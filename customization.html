@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Scrollar.Fullscreen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
 
     <script src="extra/jquery.min.js"></script>
 
@@ -177,6 +178,11 @@
             width: 50%;
         }
 
+        .safari-300x300 {
+            height: 300px;
+            width: 300px;
+        }
+
         .safari .scrollar-viewport {
             bottom: 14px;
             right: 14px;
@@ -300,9 +306,11 @@
 <body>
     <div id="menu">
         <div class="title">Styles</div>
+        <div class="item" data-style="none">None</div>
         <div class="item selected" data-style="default">Default</div>
         <div class="item" data-style="safari">Safari (OS X Mountain Lion)</div>
         <div class="item" data-style="safari safari-50">Safari 50% (OS X Mountain Lion)</div>
+        <div class="item" data-style="safari safari-300x300">Safari 300x300 (OS X Mountain Lion)</div>
     </div>
 
     <div id="content" class="default">
