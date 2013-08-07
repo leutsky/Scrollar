@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Scrollar as jQuery plugin</title>
+
+    <script src="../extra/jquery.min.js"></script>
+    <link rel="stylesheet" href="main.css">
+
+    <link rel="stylesheet" href="../scrollar.css">
+    <link rel="stylesheet" href="../themes/scrollar.safari.style.css">
+    <script src="../scrollar.js"></script>
+
+    <script>
+        $(function () {
+            $("#content").scrollar();
+        });
+    </script>
+</head>
+<body>
+    <div id="content" class="default">
+        <img src="content.jpg">
+        <img src="content.jpg"><br>
+        <img src="content.jpg">
+        <img src="content.jpg">
+    </div>
+</body>
+</html>
