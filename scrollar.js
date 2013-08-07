@@ -7,6 +7,11 @@
 /**
  * options:
  *  element : jQuery|selector
+ *  or
+ *  container : jQuery|selector
+ *
+ *  autoUpdate : false|number > 100
+ *
  *  hscroll : true|false
  *  vscroll : true|false
  */
@@ -74,6 +79,15 @@
                 if (!("element" in options || "container" in options || "wrap" in options)) {
                     throw new Error("Scrollar.options must contain 'element' or 'container'");
                 }
+
+                // autoUpdate
+                if (!("autoUpdate" in options)) {
+                    options.autoUpdate = false;
+                }
+                if (typeof options.autoUpdate === "number" && options.autoUpdate < 30) {
+                    options.autoUpdate = false;
+                }
+
                 options.hscroll = ("hscroll" in options) ? !!options.hscroll : true ;
                 options.vscroll = ("vscroll" in options) ? !!options.vscroll : true ;
                 return options;
@@ -237,7 +251,10 @@
 
         var _update = function () { _this.update(); }
         $(window).resize(_update);
-        setInterval(_update, 300);
+
+        if (typeof options.autoUpdate === "number") {
+            setInterval(_update, options.autoUpdate);
+        }
         setTimeout(_update, 20);
     }
 
