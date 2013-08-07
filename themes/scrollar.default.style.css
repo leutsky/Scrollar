@@ -1,0 +1,91 @@
+/**
+ * Author: Alexander Leutsky
+ * Default style for Scrollar
+ *
+ */
+
+/***  Default style  ***/
+.scrollar-viewport {
+    bottom: 2px;
+    right: 2px;
+}
+
+.scrollar-scroll {
+    z-index: 0;
+}
+
+.scrollar-scroll:hover, .scrollar-active-scroll {
+    z-index: 2000;
+}
+
+.scrollar-scroll:hover, .scrollar-active-scroll, .scrollar-track {
+    background-color: #eee;
+}
+
+.scrollar-hscroll {
+    bottom: 0px;
+    height: 10px;
+    left: 0px;
+    right: 0px;
+}
+
+.scrollar-hscroll > div {
+    height: 2px;
+    top: 8px;
+}
+
+.scrollar-hscroll:hover > div, .scrollar-hscroll.scrollar-active-scroll > div {
+    height: 10px;
+    top: 0px;
+}
+
+.scrollar-vscroll {
+    bottom: 0px;
+    right: 0px;
+    top: 0px;
+    width: 10px;
+}
+
+.scrollar-vscroll > div {
+    left: 8px;
+    width: 2px;
+}
+
+.scrollar-vscroll:hover > div, .scrollar-vscroll.scrollar-active-scroll > div {
+    left: 0px;
+    width: 10px;
+}
+
+.scrollar-htrack {
+    bottom: 0px;
+    left: 11px;
+    right: 11px;
+    top: 0px;
+}
+
+.scrollar-vtrack {
+    bottom: 11px;
+    left: 0px;
+    right: 0px;
+    top: 11px;
+}
+
+.scrollar-btn,
+.scrollar-thumb,
+.scrollar-corner {
+    background-color: #999;
+}
+
+.scrollar-btnup, .scrollar-btndown {
+    height: 10px;
+    left: 0px;
+}
+
+.scrollar-btnleft, .scrollar-btnright {
+    top: 0px;
+    width: 10px;
+}
+
+.scrollar-corner {
+    display: none;
+}
