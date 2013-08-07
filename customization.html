@@ -5,84 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
 
     <script src="extra/jquery.min.js"></script>
+    <link rel="stylesheet" href="extra/main.css">
 
     <link rel="stylesheet" href="scrollar/scrollar.css">
     <script src="scrollar/scrollar.js"></script>
 
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-
-
-        /***  Menu  ***/
-
-
-        #menu {
-            background-color: #fff;
-            border: 1px solid #778899;
-            border-left: none;
-            border-top: none;
-            border-bottom-right-radius: 7px;
-            opacity: 0.5;
-            padding: 5px;
-            position: fixed;
-            z-index: 10;
-        }
-
-        #menu:hover {
-            opacity: 1;
-        }
-
-        #menu:hover div.item {
-            display: block;
-        }
-
-        #menu div.title {
-            cursor: pointer;
-            margin: 0px 10px;
-            text-align: center;
-        }
-
-        #menu div.item {
-            border: 1px solid silver;
-            border-radius: 5px;
-            box-shadow: inset 0px -2px 4px #eee;
-            cursor: pointer;
-            display: none;
-            font-family: Arial;
-            font-size: 12px;
-            margin: 2px 0px;
-            padding: 3px 7px;
-        }
-
-        #menu div.item:hover {
-            background-color: #e0ffff;
-        }
-
-        #menu div.item:active {
-            box-shadow: inset 0px 1px 2px #add8e6;
-        }
-
-        #menu div.item.selected {
-            background-color: #e0ffff;
-            box-shadow: inset 0px 1px 2px #add8e6;
-        }
-
-        /* Customize scrollar */
-
-        /* stretch it */
-        /** root element */
-        #content {
-            position: fixed;
-        }
-
-
-
         /***  Style "Default"  ***/
-
 
         .default .scrollar-viewport {
             bottom: 2px;
@@ -320,5 +249,32 @@
         <img src="extra/content.jpg">
     </div>
 
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter21304945 = new Ya.Metrika({id:21304945,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true});
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="//mc.yandex.ru/watch/21304945" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </body>
 </html>

@@ -11,9 +11,43 @@
  *  vscroll : true|false
  */
 
-(function (window) {
+(function (window, $) {
     window.Scrollar = function (options) {
         return new Scrollar(options);
+    }
+    // register as jQuery.plugin
+    if (typeof $ === "function") {
+        /**
+         * jQuery.plugin
+         * @param options
+         * @return {*}
+         *
+         * options.element   = true|false // default = true
+         * options.wrap      = true|false // dev. unsupport
+         * options.container = true|false
+         * options.hscroll   = true|false
+         * options.vscroll   = true|false
+         */
+        $.fn.scrollar = function (options) {
+            if (typeof options !== "object") options = {};
+
+            var applyAs;
+
+            if (options.container) {
+                applyAs = "container";
+                delete(options.element);
+            } else {
+                applyAs = "element";
+                delete(options.container);
+            }
+
+            return this.each(function () {
+                options[applyAs] = $(this);
+                new Scrollar(options);
+            });
+        }
+    } else {
+        throw new Error("Scrollar: jQuery isn't defined.");
     }
 
     var axis_x = ["left", "pageX", "max_x", "scrollLeft"],
@@ -37,7 +71,9 @@
             case "string" :
                 return { "element" : options, "hscroll" : true, "vscroll" : true }
             case "object" :
-                if (!("element" in options)) throw new Error("Scrollar.options doesn't contain 'element'");
+                if (!("element" in options || "container" in options || "wrap" in options)) {
+                    throw new Error("Scrollar.options must contain 'element' or 'container'");
+                }
                 options.hscroll = ("hscroll" in options) ? !!options.hscroll : true ;
                 options.vscroll = ("vscroll" in options) ? !!options.vscroll : true ;
                 return options;
@@ -56,12 +92,22 @@
 
         this.options = options = normalizeOptions(options);
 
-        this.$ = $(options.element);
-        if (!this.$.hasClass("scrollar")) this.$.addClass("scrollar");
+        var children;
 
-        var children = this.$.contents().detach();
+        if ("container" in options) {
+            var $container = $(options.container);
 
-        this.$.append(template());
+            children = $container.contents().detach();
+            this.$ = $(template(true));
+
+            $container.append(this.$);
+        } else if ("element" in options) {
+            this.$ = $(options.element);
+            children = this.$.contents().detach();
+
+            if (!this.$.hasClass("scrollar")) this.$.addClass("scrollar");
+            this.$.append(template());
+        }
 
         var vp = this.$vp = $(".scrollar-viewport", this.$); // viewport
         var ss = this.$ss = $(".scrollar-systemscrolls", this.$); // systemscrolls
@@ -193,6 +239,18 @@
         $(window).resize(_update);
         setInterval(_update, 300);
         setTimeout(_update, 20);
+    }
+
+    Scrollar.prototype.__checkChanges = function () {
+        var options = this.options;
+
+        if (options.hscroll) {
+
+        }
+
+        if (options.vscroll) {
+
+        }
     }
 
     /**
@@ -396,4 +454,4 @@
 
         ss.scrollLeft = pos;
     }
-}) (window);
+}) (window, jQuery);
