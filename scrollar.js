@@ -11,9 +11,12 @@
  *  container : jQuery|selector
  *
  *  autoUpdate : false|number > 100
+ *  autoHide : true|false // dev
+ *  autoHideEffect : // dev
  *
  *  hscroll : true|false
  *  vscroll : true|false
+ *
  */
 
 (function (window, $) {
@@ -249,25 +252,22 @@
             init();
         })();
 
+        /**
+         * updating
+         * @private
+         */
         var _update = function () { _this.update(); }
+
+        // ..on resize
         $(window).resize(_update);
 
+        // ..auto update
         if (typeof options.autoUpdate === "number") {
             setInterval(_update, options.autoUpdate);
         }
+
+        // ..deffered update
         setTimeout(_update, 20);
-    }
-
-    Scrollar.prototype.__checkChanges = function () {
-        var options = this.options;
-
-        if (options.hscroll) {
-
-        }
-
-        if (options.vscroll) {
-
-        }
     }
 
     /**
@@ -388,6 +388,10 @@
 
         if (arguments.length == 0) {
             return ss.scrollTop;
+        } else if (typeof pos !== "number") {
+            var $el = this.$ct.find(pos);
+            if ($el.length == 0) return;
+            pos = $el.offset().top - this.$ct.offset().top;
         } else if (pos < 0) {
             pos = ss.scrollTop + pos;
             if (pos < 0) pos = 0;
@@ -410,6 +414,8 @@
 
         if (arguments.length == 0) {
             return ss.scrollHeight - ss.clientHeight - ss.scrollTop;
+        } else if (typeof pos !== "number") {
+            return;
         } else {
             var max_pos = ss.scrollHeight - ss.clientHeight;
             if (pos < 0) {
