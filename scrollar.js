@@ -14,8 +14,8 @@
  *  autoHide : true|false // dev
  *  autoHideEffect : // dev
  *
- *  hscroll : true|false
- *  vscroll : true|false
+ *  hscroll : true|false|auto
+ *  vscroll : true|false|auto
  *
  */
 
@@ -33,8 +33,8 @@
          * options.element   = true|false // default = true
          * options.wrap      = true|false // dev. unsupport
          * options.container = true|false
-         * options.hscroll   = true|false
-         * options.vscroll   = true|false
+         * options.hscroll   = true|false|auto
+         * options.vscroll   = true|false|auto
          */
         $.fn.scrollar = function (options) {
             if (typeof options !== "object") options = {};
@@ -91,8 +91,9 @@
                     options.autoUpdate = false;
                 }
 
-                options.hscroll = ("hscroll" in options) ? !!options.hscroll : true ;
-                options.vscroll = ("vscroll" in options) ? !!options.vscroll : true ;
+                if (options.hscroll !== "auto" && options.hscroll !== false) options.hscroll = true;
+                if (options.vscroll !== "auto" && options.vscroll !== false) options.vscroll = true;
+
                 return options;
             default :
                 throw new TypeError("Scrollar.options isn't object or string");
@@ -296,6 +297,11 @@
 
             var ss_sw = ss.scrollWidth;
 
+            // Автоскрытие скроллбаров
+            if (options.hscroll === "auto") {
+                this.$[(ss_sw <= ss_cw) ? "addClass" : "removeClass"]("scrollar-nohscroll");
+            }
+
             // Ширина горизонтального ползунка
             var htrack_w = scroll.track.width();
             var hthumb_w = htrack_w * ss_cw / ss_sw;
@@ -327,12 +333,17 @@
 
             // Корректировка высоты contentwrap
             cw.style.height = (ct.offsetHeight + env.correct_h) + "px";
-            while (Math.abs(cw.scrollHeight - ct.offsetHeight) <= 1) {
-                cw.style.height = (ct.offsetHeight + 1000) + "px";
-                cw.style.height = (ct.offsetHeight + env.correct_w) + "px";
-            }
+            //while (Math.abs(cw.scrollHeight - ct.offsetHeight) <= 1) {
+            //    cw.style.height = (ct.offsetHeight + 1000) + "px";
+            //    cw.style.height = (ct.offsetHeight + env.correct_w) + "px";
+            //}
 
             var ss_sh = ss.scrollHeight;
+
+            // Автоскрытие скроллбаров
+            if (options.vscroll === "auto") {
+                this.$[(ss_sh <= ss_ch) ? "addClass" : "removeClass"]("scrollar-novscroll");
+            }
 
             // Высота вертикального ползунка
             var vtrack_h = scroll.track.height();
