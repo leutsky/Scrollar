@@ -105,7 +105,8 @@
     }
 
     function writeCorrectStyles(x, y) {
-        $("head").append("<style>.scrollar-contentwrap { padding: 0px " + x + "px " + y + "px 0px; }</style>")
+        //.scrollar-contentwrap { padding: 0px " + x + "px " + y + "px 0px; }
+        $("head").append("<style>.scrollar-systemscrolls {margin: 0px -" + (22 - x) + "px -" + (22 - y) + "px 0px;}</style>")
     }
 
     /**
