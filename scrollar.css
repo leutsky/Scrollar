@@ -19,19 +19,23 @@
 }
 
 .scrollar-viewport {
+
     clip: rect(0, auto, auto, 0);
     clip: rect(0 100% 100% 0);
     overflow: hidden;
 }
 
 .scrollar-systemscrolls {
-    bottom: -22px;
+    margin: 0px -22px -22px 0px;
+    padding: 0px 22px 22px 0px;
     overflow-x: scroll;
     overflow-y: scroll;
-    right: -22px;
 }
 
-.scrollar-contentwrap { position: absolute; }
+.scrollar-contentwrap {
+    min-width: 100%;
+    position: absolute;
+}
 
 .scrollar-content { }
 
