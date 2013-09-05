@@ -4,7 +4,11 @@
  */
 
 
-.scrollar, .scrollar-viewport, .scrollar-systemscrolls, .scrollar-contentwrap, .scrollar-content {
+.scrollar, .scrollar-contentwrap, .scrollar-content {
+    position: relative;
+}
+
+.scrollar-viewport, .scrollar-systemscrolls {
     bottom: 0px;
     height: auto;
     left: 0px;
@@ -14,25 +18,21 @@
     width: auto;
 }
 
-.scrollar { overflow: visible; position: relative; }
-
-.scrollar-contentwrap, .scrollar-content {
-    bottom: auto;
-    right: auto;
-}
-
 .scrollar-viewport {
     clip: rect(0, auto, auto, 0);
     clip: rect(0 100% 100% 0);
+    overflow: hidden;
 }
 
 .scrollar-systemscrolls {
     bottom: -22px;
-    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
     right: -22px;
 }
 
-.scrollar-contentwrap { }
+.scrollar-contentwrap { position: absolute; }
+
 .scrollar-content { }
 
 .scrollar-scroll,
@@ -75,11 +75,12 @@
     bottom: 0px;
 }
 .scrollar-nohscroll .scrollar-contentwrap {
-    right: 0px;
-    width: auto;
+    padding-bottom: 22px;
 }
 .scrollar-nohscroll .scrollar-content { right: 0px; }
-.scrollar-nohscroll .scrollar-systemscrolls { overflow-x: hidden; }
+.scrollar-nohscroll .scrollar-systemscrolls {
+    overflow-x: hidden;
+}
 .scrollar-nohscroll .scrollar-hscroll { display: none; }
 .scrollar-nohscroll .scrollar-vscroll { bottom: 0px; }
 .scrollar-nohscroll .scrollar-corner { display: none; }
@@ -89,11 +90,13 @@
     right: 0px;
 }
 .scrollar-novscroll .scrollar-contentwrap {
-    bottom: 0px;
-    height: auto;
+    padding-right: 22px;
 }
 .scrollar-novscroll .scrollar-content { bottom: 0px; }
-.scrollar-novscroll .scrollar-systemscrolls { overflow-y: hidden; }
+.scrollar-novscroll .scrollar-systemscrolls {
+    overflow-y: hidden;
+    right: 0px;
+}
 .scrollar-novscroll .scrollar-vscroll { display: none; }
 .scrollar-novscroll .scrollar-hscroll { right: 0px; }
 .scrollar-novscroll .scrollar-corner { display: none; }
