@@ -4,11 +4,7 @@
  */
 
 
-.scrollar, .scrollar-contentwrap, .scrollar-content {
-    position: relative;
-}
-
-.scrollar-viewport, .scrollar-systemscrolls {
+.scrollar, .scrollar-viewport, .scrollar-systemscrolls, .scrollar-contentwrap, .scrollar-content {
     bottom: 0px;
     height: auto;
     left: 0px;
@@ -18,10 +14,16 @@
     width: auto;
 }
 
+.scrollar { overflow: visible; position: relative; }
+
+.scrollar-contentwrap, .scrollar-content {
+    bottom: auto;
+    right: auto;
+}
+
 .scrollar-viewport {
     clip: rect(0, auto, auto, 0);
     clip: rect(0 100% 100% 0);
-    overflow: hidden;
 }
 
 .scrollar-systemscrolls {
@@ -31,8 +33,7 @@
     right: -22px;
 }
 
-.scrollar-contentwrap { position: absolute; }
-
+.scrollar-contentwrap { }
 .scrollar-content { }
 
 .scrollar-scroll,
@@ -75,10 +76,12 @@
     bottom: 0px;
 }
 .scrollar-nohscroll .scrollar-contentwrap {
-    padding-bottom: 22px;
+    right: 0px;
+    width: auto;
 }
 .scrollar-nohscroll .scrollar-content { right: 0px; }
 .scrollar-nohscroll .scrollar-systemscrolls {
+    bottom: 0px;
     overflow-x: hidden;
 }
 .scrollar-nohscroll .scrollar-hscroll { display: none; }
@@ -90,7 +93,8 @@
     right: 0px;
 }
 .scrollar-novscroll .scrollar-contentwrap {
-    padding-right: 22px;
+    bottom: 0px;
+    height: auto;
 }
 .scrollar-novscroll .scrollar-content { bottom: 0px; }
 .scrollar-novscroll .scrollar-systemscrolls {

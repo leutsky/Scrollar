@@ -23,6 +23,7 @@
     window.Scrollar = function (options) {
         return new Scrollar(options);
     }
+
     // register as jQuery.plugin
     if (typeof $ === "function") {
         /**
@@ -57,6 +58,9 @@
     } else {
         throw new Error("Scrollar: jQuery isn't defined.");
     }
+
+    // Globals
+    var initialized = false;
 
     var axis_x = ["left", "pageX", "max_x", "scrollLeft"],
         axis_y = ["top", "pageY", "max_y", "scrollTop"];
@@ -98,6 +102,10 @@
             default :
                 throw new TypeError("Scrollar.options isn't object or string");
         }
+    }
+
+    function writeCorrectStyles(x, y) {
+        $("head").append("<style>.scrollar-contentwrap { padding: 0px " + x + "px " + y + "px 0px; }</style>")
     }
 
     /**
@@ -143,8 +151,13 @@
         if (!options.hscroll) this.$.addClass("scrollar-nohscroll");
         if (!options.vscroll) this.$.addClass("scrollar-novscroll");
 
+        if (!initialized) {
+            writeCorrectStyles(ss[0].clientWidth - vp.width(), ss[0].clientHeight - vp.height());
+        }
+
         // ..horizontal scroll
-        env.correct_w = ss[0].clientWidth - vp.width();
+
+
         if (options.hscroll) {
             hscroll = this.$hscroll = $(".scrollar-hscroll", this.$); // h scroll
             htrack = this.$htrack = $(".scrollar-htrack", this.$); // h track
@@ -157,11 +170,9 @@
             this.$br.click(function () { _this.scrollRight(-20); });
 
             env.hscroll = { "scroll" : hscroll, "track" : htrack, "thumb" : hthumb, "axis" : axis_x };
-        } else {
-            ct.css("right", env.correct_w);
         }
+
         // ..vertical scroll
-        env.correct_h = ss[0].clientHeight - vp.height();
         if (options.vscroll) {
             vscroll = this.$vscroll = $(".scrollar-vscroll", this.$); // v scroll
             vtrack = this.$vtrack = $(".scrollar-vtrack", this.$); // v track
@@ -174,8 +185,6 @@
             this.$bd.click(function () { _this.scrollBottom(-20); });
 
             env.vscroll = { "scroll" : vscroll, "track" : vtrack, "thumb" : vthumb, "axis" : axis_y };
-        } else {
-            ct.css("bottom", env.correct_h);
         }
 
 
@@ -211,8 +220,8 @@
 
                 thumb = scroll.thumb;
 
-                //if (options.hscroll) hthumb.off("mousedown.scrollar");
-                //if (options.vscroll) vthumb.off("mousedown.scrollar");
+                if (options.hscroll) hthumb.off("mousedown.scrollar");
+                if (options.vscroll) vthumb.off("mousedown.scrollar");
 
                 delta = track.offset()[axis[0]] + e[axis[1]] - thumb.offset()[axis[0]];
 
@@ -286,16 +295,8 @@
         if (options.hscroll) {
             scroll = env.hscroll;
 
-            var ss_cw = ss.clientWidth;
-
-            // Корректировка ширины contentwrap
-            cw.style.width = (ct.offsetWidth + env.correct_w) + "px";
-            while (Math.abs(cw.scrollWidth - ct.offsetWidth) <= 1) {
-                cw.style.width = (ct.offsetWidth + 1000) + "px";
-                cw.style.width = (ct.offsetWidth + env.correct_w) + "px";
-            }
-
-            var ss_sw = ss.scrollWidth;
+            var ss_cw = ss.clientWidth,
+                ss_sw = ss.scrollWidth;
 
             // Автоскрытие скроллбаров
             if (options.hscroll === "auto") {
@@ -303,6 +304,7 @@
             }
 
             // Ширина горизонтального ползунка
+
             var htrack_w = scroll.track.width();
             var hthumb_w = htrack_w * ss_cw / ss_sw;
             if (hthumb_w > htrack_w) {
@@ -311,6 +313,7 @@
                 hthumb_w = 30;
             }
             scroll.thumb.outerWidth(hthumb_w);
+
 
             // Коэффициенты пропорциональности
             x = htrack_w - hthumb_w;
@@ -329,16 +332,8 @@
         if (options.vscroll) {
             scroll = env.vscroll;
 
-            var ss_ch = ss.clientHeight;
-
-            // Корректировка высоты contentwrap
-            cw.style.height = (ct.offsetHeight + env.correct_h) + "px";
-            //while (Math.abs(cw.scrollHeight - ct.offsetHeight) <= 1) {
-            //    cw.style.height = (ct.offsetHeight + 1000) + "px";
-            //    cw.style.height = (ct.offsetHeight + env.correct_w) + "px";
-            //}
-
-            var ss_sh = ss.scrollHeight;
+            var ss_sh = ss.scrollHeight,
+                ss_ch = ss.clientHeight;
 
             // Автоскрытие скроллбаров
             if (options.vscroll === "auto") {
@@ -368,6 +363,7 @@
             scroll.thumb.css("top", ss.scrollTop / scroll.ratio);
         }
     }
+
 
     /**
      * Scrollar.content
