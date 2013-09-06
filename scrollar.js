@@ -147,14 +147,15 @@
         var htrack, hthumb, hscroll,
             vtrack, vthumb, vscroll;
 
+        if (!initialized) {
+            writeCorrectStyles(ss[0].clientWidth - vp.width(), ss[0].clientHeight - vp.height());
+            initialized = true;
+        }
+
         // Options
         // ..add classes
         if (!options.hscroll) this.$.addClass("scrollar-nohscroll");
         if (!options.vscroll) this.$.addClass("scrollar-novscroll");
-
-        if (!initialized) {
-            writeCorrectStyles(ss[0].clientWidth - vp.width(), ss[0].clientHeight - vp.height());
-        }
 
         // ..horizontal scroll
         if (options.hscroll) {
