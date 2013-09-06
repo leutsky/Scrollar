@@ -21,7 +21,7 @@
 .scrollar-viewport {
     clip: rect(0, auto, auto, 0);
     clip: rect(0 100% 100% 0);
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .scrollar-systemscrolls {
