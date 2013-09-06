@@ -105,7 +105,6 @@
     }
 
     function writeCorrectStyles(x, y) {
-        //.scrollar-contentwrap { padding: 0px " + x + "px " + y + "px 0px; }
         $("head").append("<style>.scrollar-systemscrolls {margin-right: -" + Math.abs(22 - x) + "px;} .scrollar-contentwrap { padding-bottom: " + y + "px; }</style>")
     }
 
@@ -157,8 +156,6 @@
         }
 
         // ..horizontal scroll
-
-
         if (options.hscroll) {
             hscroll = this.$hscroll = $(".scrollar-hscroll", this.$); // h scroll
             htrack = this.$htrack = $(".scrollar-htrack", this.$); // h track
@@ -278,7 +275,7 @@
         }
 
         // ..deffered update
-        setTimeout(_update, 20);
+        setTimeout(_update, 100);
     }
 
     /**
@@ -288,9 +285,17 @@
         var x, y, scroll;
         var options = this.options,
             env = this.__env,
-            ss = this.$ss[0],
-            cw = this.$cw[0],
-            ct = this.$ct[0];
+            ss = this.$ss[0];
+
+        // Автоскрытие скроллбаров
+        if (options.hscroll === "auto") {
+            this.$[(ss.scrollWidth <= ss.clientWidth) ? "addClass" : "removeClass"]("scrollar-nohscroll");
+        }
+
+        // Автоскрытие скроллбаров
+        if (options.vscroll === "auto") {
+            this.$[(ss.scrollHeight <= ss.clientHeight) ? "addClass" : "removeClass"]("scrollar-novscroll");
+        }
 
         // Горизонтальный скрол
         if (options.hscroll) {
@@ -298,11 +303,6 @@
 
             var ss_cw = ss.clientWidth,
                 ss_sw = ss.scrollWidth;
-
-            // Автоскрытие скроллбаров
-            if (options.hscroll === "auto") {
-                this.$[(ss_sw <= ss_cw) ? "addClass" : "removeClass"]("scrollar-nohscroll");
-            }
 
             // Ширина горизонтального ползунка
 
@@ -335,11 +335,6 @@
 
             var ss_sh = ss.scrollHeight,
                 ss_ch = ss.clientHeight;
-
-            // Автоскрытие скроллбаров
-            if (options.vscroll === "auto") {
-                this.$[(ss_sh <= ss_ch) ? "addClass" : "removeClass"]("scrollar-novscroll");
-            }
 
             // Высота вертикального ползунка
             var vtrack_h = scroll.track.height();
